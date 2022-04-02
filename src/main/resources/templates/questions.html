@@ -17,21 +17,22 @@
             <p class="title" data-th-text="${questions.id +'. '+questions.quest}" ></p>
 
             <div class="option">
-            <input type="radio" data-th-name="|questions[${i.index}].choose|" data-th-value="valid1" data-th-text="${questions.opt1}"/>
-                <span id="ans1"></span>
+            <input type="radio" data-th-name="|questions[${i.index}].choose|" data-th-value="valid1"
+                   data-th-text="${questions.opt1}"/>
             </div>
 
             <div class="option">
-            <input type="radio" data-th-name="|questions[${i.index}].choose|" data-th-value="valid2" data-th-text="${questions.opt2}"/>
-                <span id="ans2"></span>
+            <input type="radio" data-th-name="|questions[${i.index}].choose|" data-th-value="valid2"
+                   data-th-text="${questions.opt2}"/>
             </div>
 
             <div class="option">
-            <input type="radio" data-th-name="|questions[${i.index}].choose|" data-th-value="valid3" data-th-text="${questions.opt3}"/>
-                <span id="ans3"></span>
+            <input type="radio" data-th-name="|questions[${i.index}].choose|" data-th-value="valid3"
+                   data-th-text="${questions.opt3}"/>
             </div>
             <br>
-            <input type="hidden" data-th-name="|questions[${i.index}].correctAnswer|" data-th-value="${questions.correctAnswer}" />
+            <input type="hidden" data-th-name="|questions[${i.index}].correctAnswer|"
+                   data-th-value="${questions.correctAnswer}" />
         </div>
 
         <button type="submit" class="btn btn-danger d-block mx-auto mt-4">Finalizeaza</button>

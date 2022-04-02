@@ -42,8 +42,7 @@ public class QuestionController {
     }
 
     @GetMapping(value = "/result")
-    String result(Model model){
-        model.addAttribute("result",result);
+    String result(@ModelAttribute ("result") Result result){
         return "result";
     }
 
