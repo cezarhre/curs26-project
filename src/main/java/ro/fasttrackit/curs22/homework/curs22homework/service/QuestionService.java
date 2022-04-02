@@ -5,7 +5,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ro.fasttrackit.curs22.homework.curs22homework.model.Question;
-import ro.fasttrackit.curs22.homework.curs22homework.model.QuestionForm;
 import ro.fasttrackit.curs22.homework.curs22homework.model.QuestionFormData;
 import ro.fasttrackit.curs22.homework.curs22homework.model.Result;
 import ro.fasttrackit.curs22.homework.curs22homework.repository.QuestionRepository;
@@ -24,22 +23,23 @@ public class QuestionService {
         this.result = result;
     }
 
-    public List<Question> getAll(){
+    public List<Question> getAll() {
         return repository.findAll();
     }
 
-    public void saveQuestion(QuestionForm questions) {
-        this.repository.save(questions);
+    public void saveQuestion(Question question) {
+        this.repository.save(question);
     }
 
     public Result getResult(QuestionFormData questionFormData) {
         result.setTotalCorrect(0);
         result.setTotalWrong(0);
-        for(Question q: questionFormData.getQuestions()) {
-            if(Objects.equals(q.getCorrectAnswer(), q.getChoose()))
+        for (Question q : questionFormData.getQuestions()) {
+            if (Objects.equals(q.getCorrectAnswer(), q.getChoose())) {
                 result.setTotalCorrect(result.getTotalCorrect() + 1);
-            else
+            } else {
                 result.setTotalWrong(result.getTotalWrong() + 1);
+            }
         }
         return result;
     }
@@ -50,7 +50,7 @@ public class QuestionService {
         if (optional.isPresent()) {
             question = optional.get();
         } else {
-            throw new RuntimeException(" Question not found for id :: " + id);
+            throw new RuntimeException(" Question not found for id: " + id);
         }
         return question;
     }

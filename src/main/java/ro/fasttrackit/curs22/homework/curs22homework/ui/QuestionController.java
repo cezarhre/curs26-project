@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ro.fasttrackit.curs22.homework.curs22homework.model.Question;
-import ro.fasttrackit.curs22.homework.curs22homework.model.QuestionForm;
 import ro.fasttrackit.curs22.homework.curs22homework.model.QuestionFormData;
 import ro.fasttrackit.curs22.homework.curs22homework.model.Result;
 import ro.fasttrackit.curs22.homework.curs22homework.service.QuestionService;
@@ -18,8 +17,11 @@ public class QuestionController {
 
     private final QuestionService service;
 
-    public QuestionController(QuestionService service) {
+    private final Result result;
+
+    public QuestionController(QuestionService service, Result result) {
         this.service = service;
+        this.result = result;
     }
 
     @GetMapping("questions")
@@ -32,7 +34,6 @@ public class QuestionController {
         model.addAttribute("questions", service.getAll());
         return "questions";
     }
-
     @PostMapping("/submit")
     public String submit(@ModelAttribute QuestionFormData questionFormData, RedirectAttributes redirectAttributes){
         Result result = service.getResult(questionFormData);
@@ -41,19 +42,20 @@ public class QuestionController {
     }
 
     @GetMapping(value = "/result")
-    String result(){
+    String result(Model model){
+        model.addAttribute("result",result);
         return "result";
     }
 
     @GetMapping("/showNewQuestionForm")
     public String showNewQuestionForm(Model model) {
-        QuestionForm question = new QuestionForm();
+        Question question = new Question();
         model.addAttribute("questions", question);
         return "newQuestion";
     }
 
     @PostMapping("/saveQuestion")
-    public String saveQuestion(@ModelAttribute("questions") QuestionForm question) {
+    public String saveQuestion(@ModelAttribute("questions") Question question) {
         service.saveQuestion(question);
         return "redirect:/questions";
     }
