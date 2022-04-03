@@ -4,7 +4,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ro.fasttrackit.curs22.homework.curs22homework.model.Question;
 import ro.fasttrackit.curs22.homework.curs22homework.model.QuestionFormData;
 import ro.fasttrackit.curs22.homework.curs22homework.model.Result;
@@ -18,6 +17,8 @@ public class QuestionController {
     private final QuestionService service;
 
     private final Result result;
+
+    boolean submitted = false;
 
     public QuestionController(QuestionService service, Result result) {
         this.service = service;
@@ -35,15 +36,19 @@ public class QuestionController {
         return "questions";
     }
     @PostMapping("/submit")
-    public String submit(@ModelAttribute QuestionFormData questionFormData, RedirectAttributes redirectAttributes){
-        Result result = service.getResult(questionFormData);
-        redirectAttributes.addFlashAttribute("result", result);
-        return "redirect:/result";
+    public String submit(@ModelAttribute QuestionFormData questionFormData) {
+        if (!submitted) {
+            result.setTotalCorrect(service.getResult(questionFormData));
+            submitted = true;
+        }else{
+            result.setTotalWrong(service.getResult(questionFormData));
+        }
+        return "/result";
     }
 
-    @GetMapping(value = "/result")
-    String result(@ModelAttribute ("result") Result result){
-        return "result";
+    @ModelAttribute("result")
+    public Result getResult(){
+        return result;
     }
 
     @GetMapping("/showNewQuestionForm")

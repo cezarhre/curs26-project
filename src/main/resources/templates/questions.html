@@ -17,17 +17,21 @@
             <p class="title" data-th-text="${questions.id +'. '+questions.quest}" ></p>
 
             <div class="option">
-            <input type="radio" data-th-name="|questions[${i.index}].choose|" data-th-value="valid1"
+                <label for="opt1"></label>
+                <input id="opt1" type="radio" data-th-name="|questions[${i.index}].choose|" data-th-value="opt1"
                    data-th-text="${questions.opt1}"/>
+                <span data-th-if="opt1" data-th-value="${questions.correctAnswer}">  </span>
             </div>
 
             <div class="option">
-            <input type="radio" data-th-name="|questions[${i.index}].choose|" data-th-value="valid2"
+                <label for="opt2" ></label>
+            <input id="opt2" type="radio" data-th-name="|questions[${i.index}].choose|" data-th-value="opt2"
                    data-th-text="${questions.opt2}"/>
             </div>
 
             <div class="option">
-            <input type="radio" data-th-name="|questions[${i.index}].choose|" data-th-value="valid3"
+                <label for="opt3" ></label>
+            <input id="opt3" type="radio" data-th-name="|questions[${i.index}].choose|" data-th-value="opt3"
                    data-th-text="${questions.opt3}"/>
             </div>
             <br>
@@ -41,5 +45,4 @@
 
     </form>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 </html>

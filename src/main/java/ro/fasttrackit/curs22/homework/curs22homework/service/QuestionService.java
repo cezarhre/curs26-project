@@ -31,17 +31,18 @@ public class QuestionService {
         this.repository.save(question);
     }
 
-    public Result getResult(QuestionFormData questionFormData) {
-        result.setTotalCorrect(0);
-        result.setTotalWrong(0);
+    public int getResult(QuestionFormData questionFormData) {
+        int correct = 0;
         for (Question q : questionFormData.getQuestions()) {
-            if (Objects.equals(q.getCorrectAnswer(), q.getChoose())) {
+            if (q.isValid() && (Objects.equals(q.getCorrectAnswer(), q.getOpt1())) || (Objects.equals(q.getCorrectAnswer(),
+                    q.getOpt2())) || (Objects.equals(q.getCorrectAnswer(), q.getOpt3()))) {
                 result.setTotalCorrect(result.getTotalCorrect() + 1);
+                correct++;
             } else {
                 result.setTotalWrong(result.getTotalWrong() + 1);
             }
         }
-        return result;
+        return correct;
     }
 
     public Question getQuestionById(int id) {

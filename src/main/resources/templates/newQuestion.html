@@ -2,7 +2,6 @@
 <head>
     <title>Chestionar Auto</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="/questions.js"></script>
 
 </head>
@@ -16,19 +15,17 @@
 
         <input type="text" th:field="*{quest}" placeholder="Question" class="form-control mb-4 col-15"/>
 
-        <label for="valid1"></label>
-        <input id="valid1" class="form-check-input sev_check" type="checkbox" name="correctAnswer"
-               th:checked="*{valid1}" value="opt1"/>
+
+        <input class="form-check-input sev_check" type="checkbox" name="correctAnswer"
+               th:checked="*{valid}" value="opt1"/>
         <input type="text" th:field="*{opt1}" placeholder="Option 1" class="form-control mb-4 col-15"/>
 
-        <label for="valid2"></label>
-        <input id="valid2" class="form-check-input sev_check" type="checkbox" name="correctAnswer"
-               th:checked="*{valid2}" value="opt2"/>
+        <input class="form-check-input sev_check" type="checkbox" name="correctAnswer"
+               th:checked="*{valid}" value="opt2"/>
         <input type="text" th:field="*{opt2}" placeholder="Option 2" class="form-control mb-4 col-15"/>
 
-        <label for="valid3"></label>
-        <input id="valid3" class="form-check-input sev_check" type="checkbox" name="correctAnswer"
-               th:checked="*{valid3}" value="opt3"/>
+        <input class="form-check-input sev_check" type="checkbox" name="correctAnswer"
+               th:checked="*{valid}" value="opt3"/>
         <input type="text" th:field="*{opt3}" placeholder="Option 3" class="form-control mb-4 col-15"/>
 
         <button type="submit" class="btn btn-info col-2"> Save Question</button>
