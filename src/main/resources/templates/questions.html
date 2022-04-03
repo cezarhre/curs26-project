@@ -8,9 +8,9 @@
 </head>
 
 <div class="container py-5 px-4">
-    <h1 class="bg-secondary text-light">SELECTEAZA RASPUNSUL CORECT</h1>
+    <h1 class="bg-secondary text-light">CHESTIONAR AUTO</h1>
 
-    <form action="submit"  method="POST" data-th-object=${questions}>
+    <form data-th-object=${questions} style='padding: 5px; font-size: 1.5rem;'>
         <div class="ques-box bg-info text-light" data-th-each="questions, i:${questions}">
 
             <input type="hidden" data-th-name="|questions[${i.index}].quest|" data-th-value="${questions.id}" />
@@ -18,20 +18,20 @@
 
             <div class="option">
                 <label for="opt1"></label>
-                <input id="opt1" type="radio" data-th-name="|questions[${i.index}].choose|" data-th-value="opt1"
+                <input id="opt1" type="radio" data-th-name="options" data-th-value="opt1"
                    data-th-text="${questions.opt1}"/>
                 <span data-th-if="opt1" data-th-value="${questions.correctAnswer}">  </span>
             </div>
 
             <div class="option">
                 <label for="opt2" ></label>
-            <input id="opt2" type="radio" data-th-name="|questions[${i.index}].choose|" data-th-value="opt2"
+            <input id="opt2" type="radio" data-th-name="options" data-th-value="opt2"
                    data-th-text="${questions.opt2}"/>
             </div>
 
             <div class="option">
                 <label for="opt3" ></label>
-            <input id="opt3" type="radio" data-th-name="|questions[${i.index}].choose|" data-th-value="opt3"
+            <input id="opt3" type="radio" data-th-name="options" data-th-value="opt3"
                    data-th-text="${questions.opt3}"/>
             </div>
             <br>
@@ -39,7 +39,7 @@
                    data-th-value="${questions.correctAnswer}" />
         </div>
 
-        <button type="submit" class="btn btn-danger d-block mx-auto mt-4">Finalizeaza</button>
+        <button type="submit" class="btn btn-danger d-block mx-auto mt-4">SELECTEAZA RASPUNSUL CORECT</button>
 
         <a th:href = "@{/questions}"> Back to Questions List</a>
 

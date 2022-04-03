@@ -30,13 +30,14 @@ public class QuestionController {
         return findPaginated(1, model);
     }
 
-    @GetMapping("/final")
-    public String getQuestionPage(Model model){
-        model.addAttribute("questions", service.getAll());
+    @GetMapping("/final/{id}")
+    String getQuestionPage(@PathVariable(value = "id") int id, Model model){
+        Question questions = service.getQuestionById(id);
+        model.addAttribute("questions", questions);
         return "questions";
     }
     @PostMapping("/submit")
-    public String submit(@ModelAttribute QuestionFormData questionFormData) {
+    public String submit(@ModelAttribute QuestionFormData questionFormData, Model model) {
         if (!submitted) {
             result.setTotalCorrect(service.getResult(questionFormData));
             submitted = true;

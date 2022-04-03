@@ -1,8 +1,5 @@
 package ro.fasttrackit.curs22.homework.curs22homework.model;
 
-import org.springframework.stereotype.Component;
-
-import javax.persistence.Entity;
 import java.util.List;
 
 
