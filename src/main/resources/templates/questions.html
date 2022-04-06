@@ -10,39 +10,36 @@
 <div class="container py-5 px-4">
     <h1 class="bg-secondary text-light">CHESTIONAR AUTO</h1>
 
-    <form data-th-object=${questions} style='padding: 5px; font-size: 1.5rem;'>
-        <div class="ques-box bg-info text-light" data-th-each="questions, i:${questions}">
+    <form action="#" th:action="@{/result/{id}}"  method="post" data-th-object=${questions} style='padding: 5px; font-size: 1.5rem;'>
+        <div class="ques-box bg-black text-light">
 
-            <input type="hidden" data-th-name="|questions[${i.index}].quest|" data-th-value="${questions.id}" />
+            <input type="hidden" data-th-name="question" data-th-value="${questions.id}" />
             <p class="title" data-th-text="${questions.id +'. '+questions.quest}" ></p>
 
-            <div class="option">
-                <label for="opt1"></label>
-                <input id="opt1" type="radio" data-th-name="options" data-th-value="opt1"
-                   data-th-text="${questions.opt1}"/>
-                <span data-th-if="opt1" data-th-value="${questions.correctAnswer}">  </span>
+            <div class="option" style='padding: 10px;'>
+                <label for="opt1" data-th-value="${questions.opt1}"></label>
+                <input id="opt1" type="radio" data-th-name="options" data-th-value="opt1" data-th-text="${questions.opt1}"/>
             </div>
 
-            <div class="option">
+            <div class="option" style='padding: 10px;'>
                 <label for="opt2" ></label>
-            <input id="opt2" type="radio" data-th-name="options" data-th-value="opt2"
-                   data-th-text="${questions.opt2}"/>
+                <input id="opt2" type="radio" data-th-name="options" data-th-value="opt2" data-th-text="${questions.opt2}"/>
             </div>
 
-            <div class="option">
+            <div class="option" style='padding: 10px;'>
                 <label for="opt3" ></label>
-            <input id="opt3" type="radio" data-th-name="options" data-th-value="opt3"
-                   data-th-text="${questions.opt3}"/>
+                <input id="opt3" type="radio" data-th-name="options" data-th-value="opt3" data-th-text="${questions.opt3}"/>
             </div>
             <br>
-            <input type="hidden" data-th-name="|questions[${i.index}].correctAnswer|"
-                   data-th-value="${questions.correctAnswer}" />
+            <input type="hidden" data-th-name="correct" data-th-value="${questions.correctAnswer}" />
         </div>
 
-        <button type="submit" class="btn btn-danger d-block mx-auto mt-4">SELECTEAZA RASPUNSUL CORECT</button>
+        <button type="submit" class="btn btn-danger d-block mx-auto mt-4">Selecteaza raspunsul corect</button>
+
 
         <a th:href = "@{/questions}"> Back to Questions List</a>
-
+        <a th:href="@{/final/{id}(id=${questions.id}-1)}" class="btn btn-warning"> Prev </a>
+        <a th:href="@{/final/{id}(id=${questions.id}+1)}" class="btn btn-warning"> Next </a>
     </form>
 </div>
 </html>

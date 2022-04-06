@@ -3,26 +3,22 @@ package ro.fasttrackit.curs22.homework.curs22homework.ui;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import ro.fasttrackit.curs22.homework.curs22homework.model.AnsweredQuestion;
 import ro.fasttrackit.curs22.homework.curs22homework.model.Question;
-import ro.fasttrackit.curs22.homework.curs22homework.model.QuestionFormData;
-import ro.fasttrackit.curs22.homework.curs22homework.model.Result;
 import ro.fasttrackit.curs22.homework.curs22homework.service.QuestionService;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Controller
 public class QuestionController {
 
     private final QuestionService service;
 
-    private final Result result;
-
-    boolean submitted = false;
-
-    public QuestionController(QuestionService service, Result result) {
+    public QuestionController(QuestionService service) {
         this.service = service;
-        this.result = result;
     }
 
     @GetMapping("questions")
@@ -36,20 +32,14 @@ public class QuestionController {
         model.addAttribute("questions", questions);
         return "questions";
     }
-    @PostMapping("/submit")
-    public String submit(@ModelAttribute QuestionFormData questionFormData, Model model) {
-        if (!submitted) {
-            result.setTotalCorrect(service.getResult(questionFormData));
-            submitted = true;
-        }else{
-            result.setTotalWrong(service.getResult(questionFormData));
-        }
-        return "/result";
-    }
 
-    @ModelAttribute("result")
-    public Result getResult(){
-        return result;
+    @PostMapping("/result/{id}")
+    String submit(@PathVariable(value = "id") @ModelAttribute("questions") AnsweredQuestion answeredQuestion, int id, Model model){
+        Question question = service.getQuestionById(id);
+        boolean result = service.checkAnswer(answeredQuestion);
+        model.addAttribute("questions", question);
+        model.addAttribute("result", result);
+        return ("/result");
     }
 
     @GetMapping("/showNewQuestionForm")

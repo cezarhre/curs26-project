@@ -14,29 +14,17 @@ public class Question {
     private String opt1;
     private String opt2;
     private String opt3;
-    private boolean valid;
-    private String choose;
     private String correctAnswer;
 
     public Question() {
     }
 
-    public Question(String quest, String opt1, String opt2, String opt3, boolean valid, String choose, String correctAnswer) {
+    public Question(String quest, String opt1, String opt2, String opt3, String correctAnswer) {
         this.quest = quest;
         this.opt1 = opt1;
         this.opt2 = opt2;
         this.opt3 = opt3;
-        this.valid = valid;
-        this.choose = choose;
         this.correctAnswer = correctAnswer;
-    }
-
-    public boolean isValid() {
-        return valid;
-    }
-
-    public void setValid(boolean valid) {
-        this.valid = valid;
     }
 
     public int getId() {
@@ -77,14 +65,6 @@ public class Question {
 
     public void setOpt3(String opt3) {
         this.opt3 = opt3;
-    }
-
-    public String getChoose() {
-        return choose;
-    }
-
-    public void setChoose(String choose) {
-        this.choose = choose;
     }
 
     public String getCorrectAnswer() {

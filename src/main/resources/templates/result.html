@@ -10,14 +10,12 @@
 
         <h3 class="bg-danger text-center mb-5 p-2">REZULTAT</h3>
 
-        <div class="d-flex justify-content-center">
-            <p>Raspunsuri corecte:&nbsp;&nbsp;</p>
-            <p data-th-if="${result}" data-th-text="${result.totalCorrect}"></p>
+        <div data-th-if="${result}" class="d-flex justify-content-center">
+            <p>Corect</p>
         </div>
 
-        <div class="d-flex justify-content-center">
-            <p>Raspunsuri incorecte:&nbsp;&nbsp;</p>
-            <p data-th-if="${result}" data-th-text="${result.totalWrong}"></p>
+        <div data-th-unless="${result}" class="d-flex justify-content-center">
+            <p >Gresit</p>
         </div>
 
         <div class="d-flex justify-content-center mt-4">
