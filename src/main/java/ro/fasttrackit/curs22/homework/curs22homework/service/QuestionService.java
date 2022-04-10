@@ -6,8 +6,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import ro.fasttrackit.curs22.homework.curs22homework.model.AnsweredQuestion;
 import ro.fasttrackit.curs22.homework.curs22homework.model.Question;
+import ro.fasttrackit.curs22.homework.curs22homework.model.QuestionFormData;
+import ro.fasttrackit.curs22.homework.curs22homework.model.Result;
 import ro.fasttrackit.curs22.homework.curs22homework.repository.QuestionRepository;
 import ro.fasttrackit.curs22.homework.curs22homework.ui.QuestionController;
 
@@ -20,8 +21,11 @@ public class QuestionService {
 
     private final QuestionRepository repository;
 
-    public QuestionService(QuestionRepository repository) {
+    private final Result result;
+
+    public QuestionService(QuestionRepository repository, Result result) {
         this.repository = repository;
+        this.result = result;
     }
 
     public List<Question> getAll() {
@@ -32,9 +36,15 @@ public class QuestionService {
         this.repository.save(question);
     }
 
-    public boolean checkAnswer(AnsweredQuestion answer){
-       Question dbQuestion= getQuestionById(answer.getAnswerId());
-       return dbQuestion.getCorrectAnswer().equalsIgnoreCase(answer.getAnswer());
+
+    public Result getResult(QuestionFormData questionFormData) {
+        for (Question q : questionFormData.getQuestions()) {
+            if (Objects.equals(q.getCorrectAnswer(), q.getChoose()))
+                result.setTotalCorrect(result.getTotalCorrect() + 1);
+            else
+                result.setTotalWrong(result.getTotalWrong() + 1);
+        }
+        return result;
     }
 
     public Question getQuestionById(int id) {

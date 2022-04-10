@@ -10,11 +10,11 @@
 
         <h3 class="bg-danger text-center mb-5 p-2">REZULTAT</h3>
 
-        <div data-th-if="${result}" class="d-flex justify-content-center">
+        <div data-th-if="${result}" data-th-text="${result.totalCorrect}" class="d-flex justify-content-center">
             <p>Corect</p>
         </div>
 
-        <div data-th-unless="${result}" class="d-flex justify-content-center">
+        <div data-th-unless="${result}" data-th-text="${result.totalWrong}" class="d-flex justify-content-center">
             <p >Gresit</p>
         </div>
 
